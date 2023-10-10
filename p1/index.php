@@ -20,6 +20,7 @@ while ($loss == null) {
     } else {
         $player_guess = 'high';
     }
+    
     // Determine what the correct answer is compared to the chosen card
     $next_card = array_pop($deck);
     if($next_card > $chosen_card) {
@@ -29,6 +30,7 @@ while ($loss == null) {
     } else {
         $correct_answer = 'low';
     }
+
     // Detemine if the guess was correct and rotate turns
     if($player_guess == $correct_answer or $correct_answer == 'tie') { 
         if($player_turn == 'player_1') {
@@ -56,4 +58,5 @@ if($loss == 'Player 1') {
 } else {
     $winner = 'Player 1';
 }
+
 require 'index-view.php';

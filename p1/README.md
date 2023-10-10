@@ -10,12 +10,16 @@
 + Create a player choice for high or low
 + Pick next card from deck
 + Compare if player won or lost
-+ Keep going until player loses then count winning streak
++ Switch to player 2 and repeat steps
++ Determine winner based on who guesses wrong first
 
 
 
 
 ## Outside resources
-+ the rules to Hi-lo (slightly modified) https://www.online-gambling.com/hi-lo/
++ The rules to Hi-lo (slightly modified) https://www.online-gambling.com/hi-lo/
 
 ## Notes for instructor
+Future goals for improvement
++ Use array of arrays to store turn data to display each move
++ Randomize which player gets to start since you can lose on first turn being player 2 has advantage
