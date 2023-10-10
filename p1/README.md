@@ -16,6 +16,6 @@
 
 
 ## Outside resources
-
++ the rules to Hi-lo (slightly modified) https://www.online-gambling.com/hi-lo/
 
 ## Notes for instructor
