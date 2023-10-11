@@ -7,9 +7,10 @@ shuffle($deck);
 $player_1_wins = [];
 $player_2_wins = [];
 // Create a start card and start with player 1
-$player_turn = 'player_1';
+$player_turn = 'Player 1';
 $chosen_card = array_pop($deck);
 $loss = null;
+
 
 //Keep playing high low until a player loses
 while ($loss == null) {
@@ -20,7 +21,6 @@ while ($loss == null) {
     } else {
         $player_guess = 'high';
     }
-    
     // Determine what the correct answer is compared to the chosen card
     $next_card = array_pop($deck);
     if($next_card > $chosen_card) {
@@ -30,22 +30,26 @@ while ($loss == null) {
     } else {
         $correct_answer = 'low';
     }
-
+    $results[] = [
+        'Drawn Card' => $chosen_card,
+        'Player guess' => $player_guess,
+        'Next Card' => $next_card,
+        'Correct Answer' => $correct_answer,
+        'Turn' => $player_turn
+    ];
     // Detemine if the guess was correct and rotate turns
     if($player_guess == $correct_answer or $correct_answer == 'tie') { 
-        if($player_turn == 'player_1') {
-            //echo $player_turn;
+        if($player_turn == 'Player 1') {
             $player_1_wins[] = $chosen_card;
             $chosen_card = $next_card;
-            $player_turn = 'player_2';
+            $player_turn = 'Player 2';
         } else {  
-            //echo $player_turn; 
             $player_2_wins[] = $chosen_card;
             $chosen_card = $next_card;       
-            $player_turn = 'player_1';
+            $player_turn = 'Player 1';
         }
     } else {
-        if($player_turn == 'player_1') {
+        if($player_turn == 'Player 1') {
             $loss = 'Player 1';
         } else {
             $loss = 'Player 2';
