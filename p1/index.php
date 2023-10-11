@@ -30,6 +30,7 @@ while ($loss == null) {
     } else {
         $correct_answer = 'low';
     }
+    // Collect the cards dran and guesses to display.
     $results[] = [
         'Drawn Card' => $chosen_card,
         'Player guess' => $player_guess,
@@ -37,7 +38,7 @@ while ($loss == null) {
         'Correct Answer' => $correct_answer,
         'Turn' => $player_turn
     ];
-    // Detemine if the guess was correct and rotate turns
+    // Detemine if the guess was correct and rotate turns and the chosen card
     if($player_guess == $correct_answer or $correct_answer == 'tie') { 
         if($player_turn == 'Player 1') {
             $player_1_wins[] = $chosen_card;
@@ -48,6 +49,7 @@ while ($loss == null) {
             $chosen_card = $next_card;       
             $player_turn = 'Player 1';
         }
+        // Bad guess loses game and breaks the while loop
     } else {
         if($player_turn == 'Player 1') {
             $loss = 'Player 1';
@@ -56,7 +58,7 @@ while ($loss == null) {
         }
     }
 }
-
+// Determine winner based on loser.
 if($loss == 'Player 1') {
     $winner = 'Player 2';
 } else {
