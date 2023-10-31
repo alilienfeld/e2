@@ -6,15 +6,15 @@ $deck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6,
 shuffle($deck);
 $chosen_card = array_pop($deck);
 $next_card = array_pop($deck);
+// Bring chosen card info to process page to analyze if submission is correct
 session_start();
 $_SESSION['pick'] = $chosen_card;
 $_SESSION['next'] = $next_card;
+// Counting number of wins in a row for a player
 if (isset($_SESSION['streak'])) {
     $win_count = $_SESSION['streak'];
 }
-
-
-
+// Info I got back from process
 if (isset($_SESSION['results'])) {
     $results = $_SESSION['results'];
     $drawn_card = $results['Drawn'];
@@ -23,8 +23,8 @@ if (isset($_SESSION['results'])) {
     $guess = $results['Guess'];
     $answer = $results['Answer'];
     
+    // Clear the session for next game
     $_SESSION['results'] = null;
 }
-
 
 require 'index-view.php';
