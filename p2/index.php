@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+// Create an array of cards in a deck 
+// represent ace as 1 jack-king as 11-13
+$deck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13];
+shuffle($deck);
 
-<head>
-    <title>Project 1</title>
-</head>
 
-<body>
-    <h2>Game Mechanics</h2>
-    <ul>
-        <li>Player 1 draws a card then chooses if the next card drawn will be higher or lower than the current card.
-        </li>
-        <li>Ties count as a win for the player because we are not playing casino rules.</li>
-        <li>Aces are represented with 1, Jacks are 11, Queens are 12, and Kings are 13.</li>
-        <li>There are no suits but there is a full deck of cards, so four of each card.</li>
-        <li>If Player 1 guesses correctly the turn switches to Player 2.</li>
-        <li>Player 2 the chooses based on the last card if the next card will be higher or lower.</li>
-        <li>The turn rotates until a player guesses wrong.</li>
-        <li>The first player to guess wrong loses the game.</li>
-    </ul>
-    <h2>Results</h2>
-    <ul>
+// Create a start card and start with player 1
+$chosen_card = array_pop($deck);
+$next_card = array_pop($deck);
+session_start();
+$_SESSION['pick'] = $chosen_card;
+$_SESSION['next'] = $next_card;
 
-    </ul>
+if (isset($_SESSION['results'])) {
+    $results = $_SESSION['results'];
+    $drawn_card = $results['Drawn'];
+    $next_draw = $results['Next'];
+    $winner = $results['Winner'];
+    $guess = $results['Guess'];
+    $answer = $results['Answer'];
+    
+    $_SESSION['results'] = null;
+}
 
-</body>
 
-</html>
+require 'index-view.php';
