@@ -9,14 +9,21 @@ if ($_SESSION['pick'] > $_SESSION['next']) {
 } else {
     $answer = 'tie';
 }
-$winner = ($answer == $guess or $answer == 'tie') ? true : false;
+$winner = ($answer == $guess) ? true : false;
+
+if ($winner) {
+    $_SESSION['streak'] = $_SESSION['streak'] + 1;
+} else {
+    $_SESSION['streak'] = null;
+}
+
 
 $_SESSION['results'] = [
     'Drawn' => $_SESSION['pick'],
     'Next' => $_SESSION['next'],
     'Guess' => $guess,
     'Winner' => $winner,
-    'Answer' => $answer
+    'Answer' => $answer,
 ];
 
 header('Location: index.php');
