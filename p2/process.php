@@ -9,11 +9,7 @@ if ($_SESSION['pick'] > $_SESSION['next']) {
 } else {
     $answer = 'tie';
 }
-if ($answer == $guess or $answer == 'tie') {
-    $winner = true;
-} else {
-    $winner = false;
-}
+$winner = ($answer == $guess or $answer == 'tie') ? true : false;
 
 $_SESSION['results'] = [
     'Drawn' => $_SESSION['pick'],

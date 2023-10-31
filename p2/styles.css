@@ -4,10 +4,12 @@
 
 .won {
     color: darkgreen;
+    font-weight: bold;
 }
 
 .lose {
     color: crimson;
+    font-weight: bold;
 }
 
 .button {

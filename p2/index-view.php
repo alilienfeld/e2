@@ -31,9 +31,9 @@
     <ul class='results'>
         <?php if (isset($results)) { ?>
         <li><?php echo $drawn_card ?> was drawn first.</li>
-        <li>You guessed <?php echo $guess ?> for the next card.</li>
+        <li>You guessed <b><?php echo $guess ?></b> for the next card.</li>
         <li>The next card was <?php echo $next_draw ?>.</li>
-        <li>The answer is <?php echo $answer ?>.</li>
+        <li>The answer is <b><?php echo $answer ?></b>.</li>
         <?php if ($winner) { ?>
         <li class='won'>You win!</li>
         <?php } else { ?>
