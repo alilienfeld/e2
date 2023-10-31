@@ -1,3 +1,17 @@
 .results {
     list-style-type: none;
 }
+
+.won {
+    color: darkgreen;
+}
+
+.lose {
+    color: crimson;
+}
+
+.button {
+    background-color: blueviolet;
+    border: round;
+    color: white;
+}

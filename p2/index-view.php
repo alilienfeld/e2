@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <h2>Insturctions</h2>
+    <h2>Instructions</h2>
     <ul>
         <li>The computer will pull a random card from a standard deck
         </li>
@@ -21,23 +21,23 @@
     <h2>Game Play</h2>
     <form action='process.php' method='POST'>
         <label for='guess'>Will the next card be higher or lower than <?php echo $chosen_card ?> ?</label>
-        <select id='guess' name='guess'>
-            <option>high</option>
-            <option>low</option>
-        </select>
-        <button type='submit'>Submit</button>
+        <input type='radio' name='guess' id='high' value='high'
+            <?php echo (!isset($guess) or $guess == 'high') ? 'checked' : '' ?>><label for='high'>High</label>
+        <input type='radio' name='guess' id='low' value='low'
+            <?php echo (isset($guess) and $guess == 'low') ? 'checked' : '' ?>><label for='low'>Low</label>
+        <button type='submit' class='button'>Submit</button>
     </form>
     <h2>Results</h2>
     <ul class='results'>
         <?php if (isset($results)) { ?>
-        <li><?php echo $drawn_card ?> was chosen.</li>
+        <li><?php echo $drawn_card ?> was drawn first.</li>
         <li>You guessed <?php echo $guess ?> for the next card.</li>
-        <li>The next card was <?php echo $next_draw ?></li>
+        <li>The next card was <?php echo $next_draw ?>.</li>
         <li>The answer is <?php echo $answer ?>.</li>
         <?php if ($winner) { ?>
-        <li>You win!</li>
+        <li class='won'>You win!</li>
         <?php } else { ?>
-        <li>You lose!</li>
+        <li class='lose'>You lose!</li>
         <?php } ?>
         <?php } ?>
     </ul>
