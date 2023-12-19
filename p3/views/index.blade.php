@@ -5,13 +5,15 @@
 @section('content')
 
 <h2></h2>
-<h2>Instructions:</h2>
+<h2 test='home-page-header'>Instructions:</h2>
 <p>Pick if the next card will be high or low</p>
-@if($last)
-{{$last}}
-@else
-{{$original}}
-@endif
+<div test='card-shows'>
+    @if($last)
+    {{$last}}
+    @else
+    {{$original}}
+    @endif
+</div>
 
 <form method='POST' action='/process'>
     @if($last)
@@ -19,25 +21,28 @@
     @else
     <input type='hidden' name='original' value='{{$original}}'>
     @endif
-    <input type='radio' name='guess' value='high' id='high'><label for='high'>High</label>
-    <input type='radio' name='guess' value='low' id='low'><label for='low'>Low</label>
-    <input type='radio' name='guess' value='tie' id='tie'><label for='tie'>Tie</label>
-    <button type='submit' class='btn btn-primary'>Guess!</button>
+    <input test='high-radio' type='radio' name='guess' value='high' id='high'><label for='high'>High</label>
+    <input test='low-radio' type='radio' name='guess' value='low' id='low'><label for='low'>Low</label>
+    <input test='tie-radio' type='radio' name='guess' value='tie' id='tie'><label for='tie'>Tie</label>
+    <button test='submit-button' type='submit' class='btn btn-primary'>Guess!</button>
 </form>
 @if($app->errorsExist())
-<ul class='error alert alert-danger'>
+<ul test='form-validation-errors' class='error alert alert-danger'>
     @foreach($app->errors() as $error)
     <li>{{ $error }}</li>
     @endforeach
 </ul>
 @endif
 @if($answer)
-Card was {{$original}}. You said {{$guess}}. Next was {{$next}}. Answer was {{$answer}}.
+<div test='results-div'>Card was <span test='first-card'>{{$original}}</span>. You said <span
+        test='player-guess'>{{$guess}}</span>. Next was <span test='next-card'>{{$next}}</span>. Answer was
+    <span test='correct-answer'>{{$answer}}</span>.
+</div>
 @if($won)
-You win!
+<div class='won' test='won-message'>You win!</div>
 @else
-You lose!
+<div class='lost' test='lost-message'>You lose!</div>
 @endif
 @endif
-
+<a test='history-page-link' href='/history'>See History</a>
 @endsection
