@@ -1,4 +1,7 @@
 @extends('templates/master')
+@section('title')
+Round History
+@endsection
 @section('content')
 <h2 test='history-page-header'>History page</h2>
 <ul class="list-group list-group-flush">
@@ -7,5 +10,6 @@
     </li>
     @endforeach
 </ul>
-<a test='back-to-home-page' href='/'>Home</a>
+<a class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" test='back-to-home-page'
+    href='/'>Home</a>
 @endsection

@@ -8,13 +8,14 @@ class AppController extends Controller
      */
     public function index()
     {
-
+        # If it's the first time visiting the page or the page is refreshed
+        # get an initial card draw from process
         if(!$this->app->old('original')) {
             return $this->app->redirect('/process');
         }
 
+        # Otherwise we are arriving on this page  to dispay form or after form submission
         $first_card = $this->app->old('original');
-        //$deck = $this->app->old('deck');
         $won = $this->app->old('won');
         $next_card = $this->app->old('next');
         $answer = $this->app->old('answer');
@@ -33,12 +34,15 @@ class AppController extends Controller
     }
     public function process() 
     {   
-
+        # If we are arriving on the page due to form submission and not intializing the game
+        # We validate the form had hidden field for the number we were guessing against
+        # Form wll always have original value persisted from first form submission
         if($this->app->input('original')) {
             $this->app->validate([
                 'guess' => 'required',
                 'original' => 'required'
             ]);
+            #Game logic to pull next card and check winner
             $deck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13];
             shuffle($deck);
             $guess = $this->app->input('guess');
@@ -55,7 +59,7 @@ class AppController extends Controller
             }
             $won = ($answer == $guess);
             
-            // Persist to DB
+            # Persist to DB
             $this->app->db()->insert('rounds', [
                 'guess' => $guess,
                 'original' => $original_card,
@@ -64,8 +68,9 @@ class AppController extends Controller
                 'won' => ($won) ? 1 : 0,
                 'timestamp' => date('Y-m-d H:i:s')
             ]);
-
+            # Rotate the next card in the selection
             $last_card = $next_card;
+            #Go back home with results
             return $this->app->redirect('/', [
                 'original' => $original_card,
                 'next' => $next_card,
@@ -77,14 +82,13 @@ class AppController extends Controller
             ]);
         } 
         
-        
+        # If we are on this page from index for first card draw we draw an original card
         $deck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13];
         shuffle($deck);
         $original_card = array_pop($deck);
         
         return $this->app->redirect('/', [
             'original' => $original_card,
-            //'deck' => $deck,
 
         ]);
         

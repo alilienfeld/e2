@@ -1,6 +1,8 @@
 @extends('templates/master')
 
-
+@section('title')
+High or Low
+@endsection
 
 @section('content')
 
@@ -24,6 +26,7 @@
     <input test='high-radio' type='radio' name='guess' value='high' id='high'><label for='high'>High</label>
     <input test='low-radio' type='radio' name='guess' value='low' id='low'><label for='low'>Low</label>
     <input test='tie-radio' type='radio' name='guess' value='tie' id='tie'><label for='tie'>Tie</label>
+    </div>
     <button test='submit-button' type='submit' class='btn btn-primary'>Guess!</button>
 </form>
 @if($app->errorsExist())
