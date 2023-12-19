@@ -11,13 +11,13 @@
 ## Outside resources
 + https://stackoverflow.com/questions/6547209/passing-an-array-using-an-html-form-hidden-element 
 ## Notes for instructor
-+ I read through https://github.com/susanBuck/e2-fall23/issues/40 to understand next steps but ran out of time to implement.
++ I read through https://github.com/susanBuck/e2-fall23/issues/40 to understand next steps but decided not to implement. If every pull is a new game then there is no reason to remember the deck.
 
 ## Codeception testing output
 ```
 Codeception PHP Testing Framework v5.0.12 https://stand-with-ukraine.pp.ua
 
-Tests.Acceptance Tests (4) -----------------------------------------------------
+Tests.Acceptance Tests (4) -------------------------------------------------------------------
 P3Cest: Play game
 Signature: Tests\Acceptance\P3Cest:playGame
 Test: tests/Acceptance/P3Cest.php:playGame
@@ -29,17 +29,17 @@ Scenario --
  I see element "[test=results-div]"
  I grab text from "[test=first-card]"
  I grab text from "[test=next-card]"
- Original card: 3
- Next draw: 10
- I see element "[test=won-message]"
+ Original card: 10
+ Next draw: 9
+ I see element "[test=lost-message]"
  I see element "[test=player-guess]"
  I fill field "[test=low-radio]","low"
  I click "[test=submit-button]"
  I see element "[test=results-div]"
  I grab text from "[test=first-card]"
  I grab text from "[test=next-card]"
- Original card: 10
- Next draw: 6
+ Original card: 9
+ Next draw: 4
  I see element "[test=won-message]"
  I see element "[test=player-guess]"
  PASSED 
@@ -50,10 +50,10 @@ Test: tests/Acceptance/P3Cest.php:showsHistoryAndRoundDetails
 Scenario --
  I am on page "/history"
  I grab multiple "[test=individual-round]"
- I assert greater than or equal 10,34
+ I assert greater than or equal 10,12
  I grab text from "[test=individual-round]"
- I click "2023-12-19 04:21:29"
- I see "2023-12-19 04:21:29"
+ I click "2023-12-19 12:06:51"
+ I see "2023-12-19 12:06:51"
  I see element "[test=round-details-header]"
  I see "Round Id:"
  PASSED 
@@ -80,8 +80,8 @@ Scenario --
  I see element "[test=home-page-header]"
  PASSED 
 
---------------------------------------------------------------------------------
-Time: 00:00.307, Memory: 12.00 MB
+----------------------------------------------------------------------------------------------
+Time: 00:00.481, Memory: 12.00 MB
 
 OK (4 tests, 17 assertions)
 ```
