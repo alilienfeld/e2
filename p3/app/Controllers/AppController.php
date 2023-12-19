@@ -12,6 +12,7 @@ class AppController extends Controller
         if(!$this->app->old('original')) {
             return $this->app->redirect('/process');
         }
+
         $first_card = $this->app->old('original');
         //$deck = $this->app->old('deck');
         $won = $this->app->old('won');
@@ -19,10 +20,6 @@ class AppController extends Controller
         $answer = $this->app->old('answer');
         $guess = $this->app->old('guess');
         $last_card = $this->app->old('last');
-
-
-
-
         
         return $this->app->view('index', [
             'original' => $first_card,
@@ -36,7 +33,12 @@ class AppController extends Controller
     }
     public function process() 
     {   
-        if($this->app->input('guess')) {
+
+        if($this->app->input('original')) {
+            $this->app->validate([
+                'guess' => 'required',
+                'original' => 'required'
+            ]);
             $deck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13];
             shuffle($deck);
             $guess = $this->app->input('guess');
@@ -52,10 +54,18 @@ class AppController extends Controller
                 $answer = 'tie';
             }
             $won = ($answer == $guess);
-            //Persist to DB
-            $last_card = $next_card;
             
+            // Persist to DB
+            $this->app->db()->insert('rounds', [
+                'guess' => $guess,
+                'original' => $original_card,
+                'draw' => $next_card,
+                'answer' => $answer,
+                'won' => ($won) ? 1 : 0,
+                'timestamp' => date('Y-m-d H:i:s')
+            ]);
 
+            $last_card = $next_card;
             return $this->app->redirect('/', [
                 'original' => $original_card,
                 'next' => $next_card,
@@ -82,7 +92,7 @@ class AppController extends Controller
     }
     public function history() 
     {
-        return $this->app->view('history');
+        return $this->app->view('history', []);
     }
     public function round() {
         return $this->app->view('round');

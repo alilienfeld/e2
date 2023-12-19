@@ -24,6 +24,13 @@
     <input type='radio' name='guess' value='tie' id='tie'><label for='tie'>Tie</label>
     <button type='submit' class='btn btn-primary'>Guess!</button>
 </form>
+@if($app->errorsExist())
+<ul class='error alert alert-danger'>
+    @foreach($app->errors() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+</ul>
+@endif
 @if($answer)
 Card was {{$original}}. You said {{$guess}}. Next was {{$next}}. Answer was {{$answer}}.
 @if($won)
