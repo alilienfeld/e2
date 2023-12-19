@@ -8,7 +8,9 @@ High or Low
 
 <h2></h2>
 <h2 test='home-page-header'>Instructions:</h2>
-<p>Pick if the next card will be high or low</p>
+<p>You will see a card representing a card from a standard deck</p>
+
+<p>Pick if the next card will be higher lower or the same as that card</p>
 <div test='card-shows'>
     @if($last)
     {{$last}}
@@ -42,9 +44,13 @@ High or Low
     <span test='correct-answer'>{{$answer}}</span>.
 </div>
 @if($won)
-<div class='won' test='won-message'>You win!</div>
+<div test='won-message' class='results'>
+    <span class='won'>You win!</span>
+</div>
 @else
-<div class='lost' test='lost-message'>You lose!</div>
+<div test='lost-message'>
+    <span class='lost'>You lose!</span>
+</div>
 @endif
 @endif
 <a test='history-page-link' href='/history'>See History</a>
